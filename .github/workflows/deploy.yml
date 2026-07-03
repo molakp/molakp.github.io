@@ -21,9 +21,6 @@ jobs:
     steps:
       - name: Checkout your repository
         uses: actions/checkout@v4
-
-      - name: Setup Node.js
-        uses: actions/checkout@v4 # Corretto: garantisce l'ambiente pulito
         
       - name: Install Node 22
         uses: actions/setup-node@v4
@@ -40,7 +37,7 @@ jobs:
       - name: Upload artifact for deployment
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./dist # La cartella dove Astro genera il sito statico
+          path: ./dist
 
   deploy:
     needs: build
