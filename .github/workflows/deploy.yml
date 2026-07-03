@@ -2,7 +2,7 @@ name: Deploy to GitHub Pages
 
 on:
   push:
-    branches: [ main ] # Si attiva ogni volta che fai un push su main
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -19,18 +19,28 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repositoryclea
+      - name: Checkout your repository
         uses: actions/checkout@v4
-      
-      # 🟢 AGGIUNTO: Forza GitHub a usare Node 22 per Astro
+
       - name: Setup Node.js
+        uses: actions/checkout@v4 # Corretto: garantisce l'ambiente pulito
+        
+      - name: Install Node 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'npm'
 
-      - name: Install, lint, and build your site
-        uses: withastro/action@v3
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build Astro website
+        run: npm run build
+
+      - name: Upload artifact for deployment
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist # La cartella dove Astro genera il sito statico
 
   deploy:
     needs: build
