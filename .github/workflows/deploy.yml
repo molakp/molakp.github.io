@@ -21,6 +21,14 @@ jobs:
     steps:
       - name: Checkout your repositoryclea
         uses: actions/checkout@v4
+      
+      # 🟢 AGGIUNTO: Forza GitHub a usare Node 22 per Astro
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: 'npm'
+
       - name: Install, lint, and build your site
         uses: withastro/action@v3
 
