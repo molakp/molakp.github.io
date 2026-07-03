@@ -19,7 +19,7 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout your repository
+      - name: Checkout your repositoryclea
         uses: actions/checkout@v4
       - name: Install, lint, and build your site
         uses: withastro/action@v3
